@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<table class="table table-striped" id="profile">
+    <thead></thead>
+    <tbody>
+    <tr>
+        <th>Фото</th>
+        <td><img th:src="@{'/img/' + ${user.fileName}}" width="100px"></td>
+    </tr>
+    <tr>
+        <th>Логин</th>
+        <td><span th:text="${user.login}"></span></td>
+    </tr>
+    <tr>
+        <th>Имя</th>
+        <td><span th:text="${user.name}"></span></td>
+    </tr>
+    <tr>
+        <th>Дата рождения</th>
+        <td><span th:text="${user.birthDate}"></span></td>
+    </tr>
+    <tr>
+        <th>Пол</th>
+        <td><span th:text="${user.sex}"></span></td>
+    </tr>
+    <tr>
+        <th>email</th>
+        <td><span th:text="${user.email}"></span></td>
+    </tr>
+    <tr>
+        <th>Дата регистрации</th>
+        <td><span th:text="${user.registrationDate}"></span></td>
+    </tr>
+    <tr>
+        <th>Категории статей</th>
+        <td></td>
+    </tr>
+    <div th:each="category : ${user.categories}">
+        <tr>
+            <td></td>
+            <td><span th:text="${category.name}"></span></td>
+        </tr>
+    </div>
+    <tr>
+        <td colspan="2" style="text-align:center"><a class="btn btn-primary" th:href="@{/}" role="button" id="prev">Назад</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

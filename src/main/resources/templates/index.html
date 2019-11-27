@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="alert alert-primary" role="alert">
+    <div th:if="${#httpServletRequest.remoteUser}">
+        <span th:inline="text">Вы вошли на сайт как [[${#httpServletRequest.remoteUser}]]!</span>
+    </div>
+    <div th:unless="${#httpServletRequest.remoteUser}">
+        Вы вошли на сайт как гость!
+    </div>
+</div>
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+        <div th:unless="${#httpServletRequest.remoteUser}">
+            <a class="nav-link" th:href="@{/loginForm}">Авторизация</a>
+        </div>
+    </li>
+    <li class="nav-item">
+        <div th:unless="${#httpServletRequest.remoteUser}">
+            <a class="nav-link" th:href="@{/regForm}">Регистрация</a>
+        </div>
+    </li>
+    <li class="nav-item">
+        <div th:if="${#httpServletRequest.remoteUser}">
+            <a class="nav-link" th:href="@{/profile}">Профиль</a>
+        </div>
+    </li>
+    <li class="nav-item">
+        <div th:if="${#httpServletRequest.remoteUser}">
+            <a class="nav-link" th:href="@{/logout}">Выход</a>
+        </div>
+    </li>
+</ul>
+<h1>Новости:</h1>
+<br><br>
+<table class="table table-striped" id="news-list">
+    <thead>
+    <tr>
+        <th scope="col">Рег.номер</th>
+        <th scope="col"></th>
+        <th scope="col">Новость</th>
+        <th scope="col">Дата создании</th>
+        <th scope="col">Ссылка</th>
+    </tr>
+    </thead>
+    <tbody>
+    <div th:each="news : ${news_list}">
+        <tr>
+            <th scope="row" th:text="${news.id}"></th>
+            <th scope="row"><img th:src="@{'/img/' + ${news.fileName}}" width="100px"></th>
+            <td><span th:text="${news.message}"></span></td>
+            <td><span th:text="${news.createDate}"></span></td>
+            <td><a th:href="${news.link}"><span th:text="${news.link}"></span></a></td>
+        </tr>
+    </div>
+    </tbody>
+</table>
+<nav aria-label="...">
+    <ul class="pagination pagination-sm justify-content-center">
+        <li class="page-item"><a class="page-link" th:href="@{/page/1}">1</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/page/2}">2</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/page/3}">3</a></li>
+    </ul>
+</nav>
+<br><br>
+</body>
+</html>

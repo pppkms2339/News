@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>News - Регистрация</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+<form id="loginForm" th:action="@{/registration}" method="post">
+    <div class="form-group">
+        <div th:unless="${message}">
+            <div class="alert alert-primary" role="alert">
+                Введите логин и пароль для регистрации нового пользователя
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="login">Логин:</label>
+        <input type="text" class="form-control" id="login" placeholder="Enter login" name="login">
+    </div>
+    <div class="form-group">
+        <label for="password">Пароль:</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+    </div>
+    <div class="form-group">
+        <div class="g-recaptcha" data-sitekey="6Le8TcQUAAAAAF72qpJ3WgNz-1l4ONjsJtKnmh3z"></div>
+    </div>
+    <div class="form-group">
+        <div th:if="${captchaError}">
+            <div class="alert alert-danger" role="alert">
+                <span th:text="${captchaError}"></span>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</body>
+</html>
